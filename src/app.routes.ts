@@ -7,61 +7,61 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
-      import('./app/auth/login/login.component').then(m => m.LoginComponent),
+      import('./app/auth/login/login').then(m => m.Login),
   },
 
   // Dashboard
   {
     path: 'dashboard',
     loadComponent: () =>
-      import('./app/dashboard/dashboard.component').then(m => m.DashboardComponent),
+      import('./app/dashboard/dashboard').then(m => m.Dashboard),
   },
 
   // WhatsApp
   {
     path: 'whatsapp/numbers',
     loadComponent: () =>
-      import('./app/whatsapp/numbers/numbers.component').then(m => m.NumbersComponent),
+      import('./app/whatsapp/numbers/numbers').then(m => m.Numbers),
   },
   {
     path: 'whatsapp/templates',
     loadComponent: () =>
-      import('./app/whatsapp/templates/templates.component').then(m => m.TemplatesComponent),
+      import('./app/whatsapp/templates/templates').then(m => m.Templates),
   },
   {
     path: 'whatsapp/meta',
     loadComponent: () =>
-      import('./app/whatsapp/meta/meta.component').then(m => m.MetaComponent),
+      import('./app/whatsapp/meta/meta').then(m => m.Meta),
   },
 
   // Campaigns
   {
     path: 'campaigns',
     loadComponent: () =>
-      import('./app/campaigns/list/list.component').then(m => m.ListComponent),
+      import('./app/campaigns/list/list').then(m => m.List),
   },
   {
     path: 'campaigns/manager',
     loadComponent: () =>
-      import('./app/campaigns/manager/manager.component').then(m => m.ManagerComponent),
+      import('./app/campaigns/manager/manager').then(m => m.Manager),
   },
   {
     path: 'campaigns/prospects',
     loadComponent: () =>
-      import('./app/campaigns/prospects/prospects.component').then(m => m.ProspectsComponent),
+      import('./app/campaigns/prospects/prospects').then(m => m.Prospects),
   },
 
   // Clients
   {
     path: 'clients',
     loadComponent: () =>
-      import('./app/clients/clients.component').then(m => m.ClientsComponent),
+      import('./app/clients/clients').then(m => m.Clients),
   },
 
   // Profiles
   {
     path: 'profiles',
     loadComponent: () =>
-      import('./app/profiles/profiles.component').then(m => m.ProfilesComponent),
+      import('./app/profiles/profiles').then(m => m.Profiles),
   },
 ];
