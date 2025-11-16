@@ -13,9 +13,7 @@ import { LayoutService } from '../service/layout.service';
     imports: [CommonModule, AppTopbar, AppSidebar, RouterModule, AppFooter],
     template: `<div class="layout-wrapper" [ngClass]="containerClass">
         <app-topbar (menuToggle)="layoutService.onMenuToggle()"></app-topbar>
-        <app-sidebar 
-            [visible]="layoutService.layoutState().overlayMenuActive || layoutService.layoutState().staticMenuMobileActive">
-        </app-sidebar>
+        <app-sidebar></app-sidebar>
         <div class="layout-main-container">
             <div class="layout-main">
                 <router-outlet></router-outlet>
