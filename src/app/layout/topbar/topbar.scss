@@ -1,0 +1,32 @@
+.layout-topbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-800);
+  padding: 0 1.5rem;
+  color: #fff;
+}
+
+.layout-menu-button {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: inherit;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.app-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.topbar-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+}

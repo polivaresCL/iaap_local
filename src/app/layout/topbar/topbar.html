@@ -1,1 +1,12 @@
-<p>topbar works!</p>
+<div class="topbar">
+    <button class="topbar-menu-button" (click)="menuToggle.emit()">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <div class="topbar-title">IAAP – Gestión de campañas digitales</div>
+
+    <div class="topbar-actions">
+        <button (click)="toggleDarkMode()"><i class="pi pi-moon"></i></button>
+        <button (click)="logout()"><i class="pi pi-sign-out"></i></button>
+    </div>
+</div>
