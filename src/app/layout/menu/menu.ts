@@ -1,12 +1,16 @@
 export const menu = [
     {
-        label: 'Dashboard',
-        icon: 'pi pi-chart-bar',
-        routerLink: ['/dashboard']
+        label: 'Home',
+        items: [
+            {
+                label: 'Dashboard',
+                icon: 'pi pi-chart-bar',
+                routerLink: ['/dashboard']
+            }
+        ]
     },
     {
         label: 'WhatsApp',
-        icon: 'pi pi-whatsapp',
         items: [
             {
                 label: 'Números',
@@ -27,7 +31,6 @@ export const menu = [
     },
     {
         label: 'Campañas',
-        icon: 'pi pi-megaphone',
         items: [
             {
                 label: 'Listado',
@@ -48,19 +51,32 @@ export const menu = [
     },
     {
         label: 'Clientes',
-        icon: 'pi pi-user',
-        routerLink: ['/clients']
+        items: [
+            {
+                label: 'Clientes',
+                icon: 'pi pi-users',
+                routerLink: ['/clients']
+            }
+        ]
     },
     {
         label: 'Perfiles',
-        icon: 'pi pi-shield',
-        routerLink: ['/profiles']
+        items: [
+            {
+                label: 'Perfiles',
+                icon: 'pi pi-shield',
+                routerLink: ['/profiles']
+            }
+        ]
     },
     {
-        label: 'Cerrar sesión',
-        icon: 'pi pi-sign-out',
-        command: () => {
-            console.log('Logout');
-        }
+        label: 'Sesión',
+        items: [
+            {
+                label: 'Cerrar sesión',
+                icon: 'pi pi-sign-out',
+                command: 'logout'
+            }
+        ]
     }
 ];

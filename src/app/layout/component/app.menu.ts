@@ -1,96 +1,106 @@
-import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
-import { AppMenuitem } from './app.menuitem';
+import { Component, inject } from '@angular/core';
+import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { RouterLink, Router } from '@angular/router';
+import { AuthService } from '../../core/auth.service';
+import { menu } from '../menu/menu';
+
+interface IaapMenuItem {
+    label: string;
+    icon?: string;
+    routerLink?: string[];
+    command?: string;
+    items?: IaapMenuItem[];
+}
 
 @Component({
     selector: 'app-menu',
     standalone: true,
-    imports: [NgFor, AppMenuitem],
+    imports: [NgFor, NgIf, CommonModule, RouterLink],
     template: `
-        <ul class="layout-menu">
-            <ng-container *ngFor="let item of model">
-                <li app-menuitem [item]="item"></li>
-            </ng-container>
-        </ul>
-    `
+        <nav class="iaap-menu">
+            <div class="iaap-menu-section" *ngFor="let section of menu">
+                <div class="iaap-menu-section-label" *ngIf="section.label">
+                    {{ section.label }}
+                </div>
+
+                <ul class="iaap-menu-list">
+                    <li *ngFor="let item of section.items"
+                        (click)="handleCommand(item)">
+                        
+                        <a
+                            class="iaap-menu-link"
+                            [routerLink]="item.routerLink || []"
+                        >
+                            <i *ngIf="item.icon" [class]="item.icon + ' iaap-menu-icon'"></i>
+                            <span class="iaap-menu-text">{{ item.label }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    `,
+    styles: [`
+        .iaap-menu {
+            padding: 1rem 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .iaap-menu-section + .iaap-menu-section {
+            margin-top: 1.5rem;
+        }
+
+        .iaap-menu-section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--surface-500);
+            margin-bottom: 0.5rem;
+        }
+
+        .iaap-menu-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .iaap-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.6rem;
+            border-radius: 6px;
+            color: var(--surface-700);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .iaap-menu-link:hover {
+            background: var(--surface-100);
+            color: var(--primary-color);
+        }
+
+        .iaap-menu-icon {
+            font-size: 1rem;
+        }
+
+        .iaap-menu-text {
+            white-space: nowrap;
+        }
+    `]
 })
 export class AppMenu {
 
-    model: any[] = [
-        {
-            label: 'Home',
-            items: [
-                {
-                    label: 'Dashboard',
-                    icon: 'pi pi-chart-bar',
-                    routerLink: ['/dashboard']
-                }
-            ]
-        },
+    menu = menu;
 
-        {
-            label: 'WhatsApp',
-            icon: 'pi pi-whatsapp',
-            items: [
-                {
-                    label: 'Números',
-                    icon: 'pi pi-phone',
-                    routerLink: ['/whatsapp/numbers']
-                },
-                {
-                    label: 'Templates',
-                    icon: 'pi pi-file-edit',
-                    routerLink: ['/whatsapp/templates']
-                },
-                {
-                    label: 'Credenciales Meta',
-                    icon: 'pi pi-key',
-                    routerLink: ['/whatsapp/meta']
-                }
-            ]
-        },
+    auth = inject(AuthService);
+    router = inject(Router);
 
-        {
-            label: 'Campañas',
-            icon: 'pi pi-megaphone',
-            items: [
-                {
-                    label: 'Listado',
-                    icon: 'pi pi-list',
-                    routerLink: ['/campaigns']
-                },
-                {
-                    label: 'Administrador',
-                    icon: 'pi pi-cog',
-                    routerLink: ['/campaigns/manager']
-                },
-                {
-                    label: 'Prospectos',
-                    icon: 'pi pi-users',
-                    routerLink: ['/campaigns/prospects']
-                }
-            ]
-        },
+    handleCommand(item: IaapMenuItem) {
+        if (!item.command) return;
 
-        {
-            label: 'Clientes',
-            icon: 'pi pi-users',
-            routerLink: ['/clients']
-        },
-
-        {
-            label: 'Perfiles',
-            icon: 'pi pi-shield',
-            routerLink: ['/profiles']
-        },
-
-        {
-            label: 'Cerrar sesión',
-            icon: 'pi pi-sign-out',
-            command: () => {
-                console.log("Logout");
-            }
+        if (item.command === 'logout') {
+            this.auth.logout();
+            this.router.navigate(['/login']);
         }
-    ];
-
+    }
 }
